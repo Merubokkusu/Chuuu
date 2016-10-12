@@ -43,7 +43,7 @@ namespace Chuuu
         String audioFile;
 
         AudioFileReader reader;
-        String AudioSND = @"C:\Users\Liam\Desktop\Music\Friends Are There.mp3";
+        String AudioSND = "Cant Figure this out yet.";
         bool CanPlaySound = true;
        private DirectSoundOut SNDout;
         public Form1() {
