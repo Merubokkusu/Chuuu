@@ -1,7 +1,7 @@
 ###### Chuuu
 #Open Source Mic Spammer (Soundboard + more) 
 ![Chuu](https://u.nya.is/sxlnzo.gif)
-With 3 U's
+#With 3 U's
 
 ##Chuuu for dummies
 - Get the latest version of Chuuu(https://github.com/Merubokkusu/Chuuu/releases)
