@@ -1,9 +1,10 @@
 ###### Chuuu
 #Open Source Mic Spammer (Soundboard + more) 
-![Chuu](https://u.nya.is/ktktjc.gif)
+![Chuu](https://u.nya.is/sxlnzo.gif)
 With 3 U's
 
 ##Chuuu for dummies
+- Get the latest version of Chuuu(https://github.com/Merubokkusu/Chuuu/releases)
 - First get VB-Audio Cable (http://vb-audio.pagesperso-orange.fr/Cable/index.htm) The download button looks like this
 ![vbdl](http://vb-audio.pagesperso-orange.fr/images/download.gif)
 - Change output device to "CABLE Input (VB-Audio Virtual Cable)"
