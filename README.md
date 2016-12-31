@@ -11,7 +11,7 @@
 - Click "File" then "Add SND"
 - Choose whatever hotkeys you want
 - Press The Hotkey
-- Wanana type?*(OR USE THE KEY THAT YOU SET AGAIN?)* press PAUSE on your board
+- Wanna type?*(OR USE THE KEY THAT YOU SET AGAIN?)* press PAUSE on your board
 
 
 ##Current Features.
