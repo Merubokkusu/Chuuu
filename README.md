@@ -25,3 +25,5 @@ Since I'm smashing my computer 24/7 I only did globalhotkeys meaning if you aren
 Todo.
 - Everything.
 - Deleting Keys/snd
+
+._.

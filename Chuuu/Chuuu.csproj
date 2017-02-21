@@ -93,6 +93,7 @@
     <Compile Include="Hotkey Editor.Designer.cs">
       <DependentUpon>Hotkey Editor.cs</DependentUpon>
     </Compile>
+    <Compile Include="IniFile.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Audio\DirectSoundOutSettingsPanel.resx">
