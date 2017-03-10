@@ -13,7 +13,7 @@ using System.Xml.Linq;
 
 namespace Chuuu {
 
-    public partial class Form1 : Form {
+    public partial class Form1 :Form {
 
         [DllImport("user32.dll")]
         public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
@@ -64,7 +64,7 @@ namespace Chuuu {
 
             pictureBox1.AllowDrop = true;
             CanPlaySound = true;
-            if (!Directory.Exists(@"Data\snd\")) {
+            if(!Directory.Exists(@"Data\snd\")) {
                 Directory.CreateDirectory(@"Data\snd\");
                 File.Create(@"Data\iwannadie.( ͡° ͜ʖ ͡°)");
             }
@@ -78,14 +78,15 @@ namespace Chuuu {
         }
 
         private void loadINI() {
-            if (File.Exists("Settings.ini") == false) {
+            if(File.Exists("Settings.ini") == false) {
                 var MyIni = new IniFile("Settings.ini");
                 MyIni.Write("KeyList", "https://ghostbin.com/paste/kkr4f", "Keys");
                 MyIni.Write("TypeModeKey", "Pause", "Keys");
                 MyIni.Write("TalkBackKey", "PageDown", "Keys");
                 TypeModeKey = MyIni.Read("TypeModeKey");
                 TalkBackKey = MyIni.Read("TalkBackKey");
-            } else {
+            }
+            else {
                 var MyIni = new IniFile("Settings.ini");
                 TypeModeKey = MyIni.Read("TypeModeKey", "Keys");
                 TalkBackKey = MyIni.Read("TalkBackKey", "Keys");
@@ -96,11 +97,11 @@ namespace Chuuu {
         }
 
         private void unregKeys() {
-            if (File.Exists("chuuu.xml") == true) {
+            if(File.Exists("chuuu.xml") == true) {
                 XDocument doc = XDocument.Load("chuuu.xml");
 
-                if (new FileInfo("chuuu.xml").Length > 0) {
-                    foreach (var coordinate in doc.Descendants("Key")) {
+                if(new FileInfo("chuuu.xml").Length > 0) {
+                    foreach(var coordinate in doc.Descendants("Key")) {
                         string idString = coordinate.Element("ID").Value;
 
                         UnregisterHotKey(this.Handle, Convert.ToInt32(idString));
@@ -111,11 +112,11 @@ namespace Chuuu {
 
         private void regKeys() {
             listSnd.Items.Clear();
-            if (File.Exists("chuuu.xml") == true) {
+            if(File.Exists("chuuu.xml") == true) {
                 XDocument doc = XDocument.Load("chuuu.xml");
 
-                if (new FileInfo("chuuu.xml").Length > 0) {
-                    foreach (var coordinate in doc.Descendants("Key")) {
+                if(new FileInfo("chuuu.xml").Length > 0) {
+                    foreach(var coordinate in doc.Descendants("Key")) {
                         string idString = coordinate.Element("ID").Value;
                         string SoundFile = coordinate.Element("SoundFile").Value;
                         string KeyHot = coordinate.Element("KeyHot").Value;
@@ -131,17 +132,21 @@ namespace Chuuu {
                         Keys keyMain;
                         Enum.TryParse(KeyHot, out keyMain);
 
-                        if (KeyHotExtra == "Shift") {
+                        if(KeyHotExtra == "Shift") {
                             RegisterHotKey(this.Handle, Convert.ToInt32(idString), (int)KeyModifier.Shift, (int)keyMain);
                             Console.Write("Shift");
                         }
-                        if (KeyHotExtra == "Alt") {
+                        if(KeyHotExtra == "Alt") {
                             RegisterHotKey(this.Handle, Convert.ToInt32(idString), (int)KeyModifier.Alt, (int)keyMain);
                             Console.Write("Alt");
                         }
-                        if (KeyHotExtra == "Control") {
+                        if(KeyHotExtra == "Control") {
                             RegisterHotKey(this.Handle, Convert.ToInt32(idString), (int)KeyModifier.Control, (int)keyMain);
                             Console.Write("Control");
+                        }
+                        if(KeyHotExtra == "None") {
+                            RegisterHotKey(this.Handle, Convert.ToInt32(idString), (int)KeyModifier.None, (int)keyMain);
+                            Console.Write("None");
                         }
                         Console.WriteLine((int)keyMain);
 
@@ -167,28 +172,30 @@ namespace Chuuu {
         protected override void WndProc(ref Message m) {
             base.WndProc(ref m);
             var sndArray = AudioList.ToArray();
-            if (CanPlaySound == true) {
-                if (m.Msg == WM_HOTKEY) {
+            if(CanPlaySound == true) {
+                if(m.Msg == WM_HOTKEY) {
                     Console.WriteLine(m.Msg);
                     //SendKeys.Send(m.HWnd);
-                    if ((int)m.WParam == 9999) {
-                        if (NotTyping == false) {
+                    if((int)m.WParam == 9999) {
+                        if(NotTyping == false) {
                             regKeys();
                             label1.Text = "Ready..";
                             NotTyping = true;
-                        } else {
+                        }
+                        else {
                             unregKeys();
                             label1.Text = "Typing..";
                             NotTyping = false;
                         }
                     }
 
-                    if (CanPlay == true && (int)m.WParam < 8000) {
-                        if (NotTyping == true) {
+                    if(CanPlay == true && (int)m.WParam < 8000) {
+                        if(NotTyping == true) {
                             playSnd(sndArray[(int)m.WParam - 1]);
                             CanPlay = false;
                         }
-                    } else if ((int)m.WParam != 9999) {
+                    }
+                    else if((int)m.WParam != 9999) {
                         SNDout.Stop();
                         CanPlay = true;
                     }
@@ -200,11 +207,11 @@ namespace Chuuu {
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e) {
-            if (File.Exists("chuuu.xml") == true) {
+            if(File.Exists("chuuu.xml") == true) {
                 XDocument doc = XDocument.Load("chuuu.xml");
 
-                if (new FileInfo("chuuu.xml").Length > 0) {
-                    foreach (var coordinate in doc.Descendants("Key")) {
+                if(new FileInfo("chuuu.xml").Length > 0) {
+                    foreach(var coordinate in doc.Descendants("Key")) {
                         string idString = coordinate.Element("ID").Value;
 
                         UnregisterHotKey(this.Handle, Convert.ToInt32(idString));
@@ -221,7 +228,7 @@ namespace Chuuu {
             hkedit.StartPosition = FormStartPosition.CenterParent;
             DialogResult dr = hkedit.ShowDialog(this);
 
-            if (dr == DialogResult.OK) {
+            if(dr == DialogResult.OK) {
                 hotKey_Main = hkedit.comboBox2.SelectedItem.ToString();
                 hotKey_Extra = hkedit.comboBox1.SelectedItem.ToString();
             }
@@ -233,12 +240,12 @@ namespace Chuuu {
             var title = Regex.Replace(Path.GetFileNameWithoutExtension(audioFile), @"\s+", "");
             string soundPath = @"data\snd\" + Path.GetFileName(audioFile);
             soundPath = soundPath.Replace(@"\\", @"\");
-            if (File.Exists("chuuu.xml") == false) {
+            if(File.Exists("chuuu.xml") == false) {
                 XmlWriterSettings xmlWriterSettings = new XmlWriterSettings();
                 xmlWriterSettings.Indent = true;
                 xmlWriterSettings.NewLineOnAttributes = true;
 
-                using (XmlWriter xmlWriter = XmlWriter.Create("chuuu.xml", xmlWriterSettings)) {
+                using(XmlWriter xmlWriter = XmlWriter.Create("chuuu.xml", xmlWriterSettings)) {
                     xmlWriter.WriteStartDocument();
                     xmlWriter.WriteStartElement("Chuuu");
 
@@ -254,7 +261,8 @@ namespace Chuuu {
                     xmlWriter.Flush();
                     xmlWriter.Close();
                 }
-            } else {
+            }
+            else {
                 XDocument xDocument = XDocument.Load("chuuu.xml");
                 XElement root = xDocument.Element("Chuuu");
                 IEnumerable<XElement> rows = root.Descendants("Key");
@@ -276,10 +284,10 @@ namespace Chuuu {
 
         private static void WriteTop(string filename) {
             string tempfile = Path.GetTempFileName();
-            using (var writer = new StreamWriter(tempfile))
-            using (var reader = new StreamReader(filename)) {
+            using(var writer = new StreamWriter(tempfile))
+            using(var reader = new StreamReader(filename)) {
                 writer.WriteLine("[");
-                while (!reader.EndOfStream)
+                while(!reader.EndOfStream)
                     writer.WriteLine(reader.ReadLine());
             }
             File.Copy(tempfile, filename, true);
@@ -294,21 +302,22 @@ namespace Chuuu {
             myDialog.CheckFileExists = true;
             myDialog.Multiselect = false;
 
-            if (myDialog.ShowDialog() == DialogResult.OK) {
+            if(myDialog.ShowDialog() == DialogResult.OK) {
                 audioFile = myDialog.FileName;
 
-                if (File.Exists(audioFile)) {
+                if(File.Exists(audioFile)) {
                     try {
-                        if (!File.Exists(@"data\snd\" + Path.GetFileName(audioFile))) {
+                        if(!File.Exists(@"data\snd\" + Path.GetFileName(audioFile))) {
                             Console.WriteLine(audioFile);
                             File.Copy(audioFile, @"data\snd\" + Path.GetFileName(audioFile), true);
                             xmlCreator();
-                        } else {
+                        }
+                        else {
                             xmlCreator();
                             Console.WriteLine("File Already In Folder");
                         }
                     }
-                    catch (System.IO.IOException) {
+                    catch(System.IO.IOException) {
                         MessageBox.Show("The File Is Currlenty Open In Another Program.");
                     }
                 }
@@ -316,7 +325,7 @@ namespace Chuuu {
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e) {
-            using (Pen p = new Pen(Color.DarkRed)) {
+            using(Pen p = new Pen(Color.DarkRed)) {
                 p.DashStyle = DashStyle.Dot;
 
                 e.Graphics.DrawRectangle(p, 0, 0, 234, 140);
@@ -332,7 +341,7 @@ namespace Chuuu {
         }
 
         private void pictureBox1_DragEnter(object sender, DragEventArgs e) {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            if(e.Data.GetDataPresent(DataFormats.FileDrop))
                 e.Effect = DragDropEffects.Copy;
             else
                 e.Effect = DragDropEffects.None;
@@ -342,52 +351,59 @@ namespace Chuuu {
             string[] audioFileList = (string[])e.Data.GetData(DataFormats.FileDrop, false);
             audioFile = audioFileList[0];
             MessageBox.Show(audioFile);
-            if (File.Exists(audioFile)) {
+            if(File.Exists(audioFile)) {
                 try {
-                    if (!File.Exists(@"data\snd\" + Path.GetFileName(audioFile))) {
+                    if(!File.Exists(@"data\snd\" + Path.GetFileName(audioFile))) {
                         Console.WriteLine(audioFile);
                         File.Copy(audioFile, @"data\snd\" + Path.GetFileName(audioFile), true);
                         xmlCreator();
-                    } else {
+                    }
+                    else {
                         xmlCreator();
                         Console.WriteLine("File Already In Folder");
                     }
                 }
-                catch (System.IO.IOException) {
+                catch(System.IO.IOException) {
                     MessageBox.Show("The File Is Currlenty Open In Another Program.");
                 }
             }
         }
 
         private void button1_Click_1(object sender, EventArgs e) {
-            if (listSnd.SelectedItems.Count > 0) { 
+            if(listSnd.SelectedItems.Count > 0) {
                 ListViewItem sndItem = listSnd.SelectedItems[0];
-            string ID = sndItem.SubItems[2].Text;
-            string file = sndItem.SubItems[0].Text;
-            //Read and remove data in XML
-            XElement xEle = XElement.Load("chuuu.xml");
-            var qry = from element in xEle.Descendants()
-                      where (string)element.Element("ID") == ID
-                      select element;
-            if (qry.Count() > 0)
-                qry.First().Remove();
-            xEle.Save("chuuu.xml");
-            regKeys();
-            NumCount();
+                string ID = sndItem.SubItems[2].Text;
+                string file = sndItem.SubItems[0].Text;
+                //Read and remove data in XML
+                XElement xEle = XElement.Load("chuuu.xml");
+                var qry = from element in xEle.Descendants()
+                          where (string)element.Element("ID") == ID
+                          select element;
+                if(qry.Count() > 0)
+                    qry.First().Remove();
+                xEle.Save("chuuu.xml");
+                if(idNumber.Max() == 1) {
+                    if(File.Exists("chuuu.xml")) {
+                        File.Delete("chuuu.xml");
+                    }
+                }
+                regKeys();
+                NumCount();
             }
         }
 
         private void NumCount() {
             try {
-                if (idNumber.FirstOrDefault() == 0) {
-                    if (File.Exists("chuuu.xml")) {
+                if(idNumber.FirstOrDefault() == 0) {
+                    if(File.Exists("chuuu.xml")) {
                         File.Delete("chuuu.xml");
                     }
-                } else {
-                    HighestNumber = idNumber.Max();
-                    Console.WriteLine("This is the highest number " + HighestNumber);
                 }
-            }catch(System.InvalidOperationException) {
+                else {
+                    HighestNumber = idNumber.Max();
+                }
+            }
+            catch(System.InvalidOperationException) {
                 MessageBox.Show("MEM");
             }
         }
