@@ -16,14 +16,14 @@
 
 ##Current Features.
 - Play sounds/music with hotkeys
-- Typing mode (Pause key)
+- Typing mode (Edit the settings.ini file after the first launch)
+- 
 
 ##Bugs.
 Since I'm smashing my computer 24/7 I only did globalhotkeys meaning if you arent in typing mode you can use your keys for anything other then Chuuu, so once you play your sound hit PAUSE.
 
 
 Todo.
-- Everything.
-- Deleting Keys/snd
+- Things
 
 ._.
