@@ -6,7 +6,7 @@ Chuuu
 ##
 ## Chuuu for dummies
 - Get the latest version of Chuuu(https://github.com/Merubokkusu/Chuuu/releases)
-- First get VB-Audio Cable (http://vb-audio.pagesperso-orange.fr/Cable/index.htm) The download button looks like this
+- First get VB-Audio Cable (http://www.vb-audio.com/Cable/#DownloadCable) The download button looks like this
 ![vbdl](http://vb-audio.pagesperso-orange.fr/images/download.gif)
 - Change output device to "CABLE Input (VB-Audio Virtual Cable)"
 - Click "File" then "Add SND"
