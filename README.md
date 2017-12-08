@@ -1,7 +1,6 @@
-# Chuuu
+# Chuuu an Open Source Mic Spammer (Soundboard + more)  
 (This program is on pause until I'm able to get to my desktop which has the newest code on it)
 
-## Open Source Mic Spammer (Soundboard + more)  
 ![Chuu](https://u.nya.is/sxlnzo.gif)  
 
 
